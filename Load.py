@@ -1,11 +1,14 @@
 import gym
 from stable_baselines3 import A2C
+import os
 
 env = gym.make("LunarLander-v2")
 env.reset()
 
-model = A2C("MlpPolicy", env, verbose=1)
-model.learn(total_timesteps=10000)
+models_dir = "models/A2C"
+model_path = f"{models_dir}/60000.zip"
+
+model = A2C.load(model_path, env=env)
 
 episodes = 10
 
